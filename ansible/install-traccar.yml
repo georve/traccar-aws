@@ -26,6 +26,15 @@
       group: root
       force: yes
 
+ - name: "Launch database container"
+    docker_container:
+    name: db
+    image: mysql:5.7.18
+    ports:
+     - 3306:3306
+    env:
+     MYSQL_ROOT_PASSWORD: example
+
   - name: Start traccar container (port 8082)
     become: yes
     docker_container:
@@ -43,6 +52,8 @@
         - 5000-5150:5000-5150/udp
       volumes:
         - /opt/traccar/mytraccar.xml:/opt/traccar/conf/traccar.xml
+      links:
+        - db:mysql
     when: LETSENCRYPT == 'true'
 
   - name: Start traccar container (port 80)
