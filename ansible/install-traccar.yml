@@ -27,16 +27,18 @@
       force: yes
 
  - name: Launch database container
+    become: yes
     docker_container:
-    name: db
-    image: mysql:5.7.18
-    ports:
-     - 3306:3306
-    env:
-     MYSQL_ROOT_PASSWORD: L3g0l4s2020=*
-     MYSQL_DATABASE: traccardb
-     MYSQL_USER: traccarUsr
-     MYSQL_PASSWORD : abc123@#$.
+      name: db
+      image: mysql:5.7.18
+      ports:
+       - 3306:3306
+      env:
+        MYSQL_ROOT_PASSWORD: L3g0l4s2020=*
+        MYSQL_DATABASE: traccardb
+        MYSQL_USER: traccarUsr
+        MYSQL_PASSWORD : abc123@#$.
+
   - name: Start traccar container (port 8082)
     become: yes
     docker_container:

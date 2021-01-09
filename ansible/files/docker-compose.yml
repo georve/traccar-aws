@@ -1,3 +1,53 @@
 version: '3.0'
 
 services:
+
+  db:
+    image: mysql:5.7.18
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+        MYSQL_ROOT_PASSWORD: L3g0l4s2020=*
+        MYSQL_DATABASE: traccardb
+        MYSQL_USER: traccarUsr
+        MYSQL_PASSWORD : abc123@#$.
+
+  traccar:
+    depends_on:
+      - db
+      image: traccar/traccar:4.6
+      ports:
+        - 8082:8082
+        - 5000-5150:5000-5150
+        - 5000-5150:5000-5150/udp
+      restart: always
+      volumes:
+        - /opt/traccar/mytraccar.xml:/opt/traccar/conf/traccar.xml
+
+  nginx:
+    depends_on:
+     - traccar
+    image: linuxserver/letsencrypt:1.0.0-ls78
+    state: started
+    recreate: yes
+    restart_policy: always
+    networks:
+        - name: traccar
+    networks_cli_compatible: yes
+    env:
+        PUID: "1000"
+        PGID: "1000"
+        TZ: "UTC"
+        URL: "{{ DOMAIN }}"
+        SUBDOMAINS: ""
+        VALIDATION: "http"
+        EMAIL: "{{ EMAIL }}"
+        DHLEVEL: "2048"
+        ONLY_SUBDOMAINS: "false"
+        STAGING: "false"
+    ports:
+        - 80:80
+        - 443:443
+    volumes:
+        - /opt/nginx/config:/config
