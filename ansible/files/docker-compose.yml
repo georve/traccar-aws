@@ -51,3 +51,6 @@ services:
         - 443:443
     volumes:
         - /opt/nginx/config:/config
+
+  volumes:
+    db_data:
