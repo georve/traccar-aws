@@ -26,7 +26,7 @@
       group: root
       force: yes
 
- - name: Launch database container
+  - name: Launch database container
     become: yes
     docker_container:
       name: db
