@@ -26,7 +26,7 @@
       group: root
       force: yes
 
- - name: "Launch database container"
+ - name: Launch database container
     docker_container:
     name: db
     image: mysql:5.7.18
