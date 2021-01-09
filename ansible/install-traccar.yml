@@ -33,8 +33,10 @@
     ports:
      - 3306:3306
     env:
-     MYSQL_ROOT_PASSWORD: example
-
+     MYSQL_ROOT_PASSWORD: L3g0l4s2020=*
+     MYSQL_DATABASE: traccardb
+     MYSQL_USER: traccarUsr
+     MYSQL_PASSWORD : abc123@#$.
   - name: Start traccar container (port 8082)
     become: yes
     docker_container:
