@@ -18,8 +18,8 @@
 
     -->
 
-    <entry key='database.driver'>ocom.mysql.cj.jdbc.Driver</entry>
-    <entry key='database.url'>jdbc:mysql://127.0.0.1:3306/traccardb?serverTimezone=UTC&amp;useSSL=false&amp;allowMultiQueries=true&amp;autoReconnect=true&amp;useUnicode=yes&amp;characterEncoding=UTF-8&amp;sessionVariables=sql_mode=''</entry>
+    <entry key='database.driver'>com.mysql.cj.jdbc.Driver</entry>
+    <entry key='database.url'>jdbc:mysql://db:3306/traccardb?serverTimezone=UTC&amp;useSSL=false&amp;allowMultiQueries=true&amp;autoReconnect=true&amp;useUnicode=yes&amp;characterEncoding=UTF-8&amp;sessionVariables=sql_mode=''</entry>
     <entry key='database.user'>traccarUsr</entry>
     <entry key='database.password'>abc123@#$.</entry>
 
