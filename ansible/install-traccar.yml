@@ -58,7 +58,7 @@
         - 5000-5150:5000-5150/udp
       volumes:
         - /opt/traccar/mytraccar.xml:/opt/traccar/conf/traccar.xml
-      depends_on:
+      links:
         - db
     when: LETSENCRYPT == 'true'
 
@@ -79,6 +79,6 @@
         - 5000-5150:5000-5150/udp
       volumes:
         - /opt/traccar/mytraccar.xml:/opt/traccar/conf/traccar.xml
-      depends_on:
+      links:
         - db
     when: LETSENCRYPT == 'false'
