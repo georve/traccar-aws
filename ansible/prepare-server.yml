@@ -39,6 +39,7 @@
         - nc
         - git
         - python2-pip
+        - nodejs
       state: present
       lock_timeout: 300
 
@@ -46,6 +47,16 @@
     become: yes
     pip:
       name: docker
+
+  
+  - name : validate the nodejs installation
+    debug: msg="Installation of node is Successfull"
+    when: ymrepo is changed
+
+  - name: Version of Node and NPM
+    shell:
+      "npm -v && node -v"
+    register: versioninfo
 
   - name: Install Docker
     become: yes
