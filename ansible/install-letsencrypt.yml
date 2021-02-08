@@ -4,6 +4,8 @@
   vars:
     DOMAIN: "{{ lookup('env','TC_DOMAIN') }}"
     EMAIL: "{{ lookup('env','TC_EMAIL') }}"
+    GIT_USER: "{{ lookup('env','TC_GITHUB_USER') }}"
+    GIT_PASSWORD: "{{ lookup('env','TC_GITHUB_PASSWORD') }}"
 
   tasks:
 
@@ -27,7 +29,19 @@
       group: "1000"
       force: yes
   # download the code from repository
+  - name: Download the  code from the GitRepo
+    become: yes
+      git:
+      repo: 'https://{{GIT_USER}}:{{GIT_PASSWORD}}@github.com/georve/traccar-aws.git'
+      dest: /srv/checkout
+      version: docker-compose-mysql
   # compile the code
+  - name: Install Dependencies with NPM install command
+      shell:
+          "npm install"
+      args:
+         chdir: /srv/checkout
+         register: npminstlout
   # copy the result to the ngxng
   - name: Start nginx container
     become: yes
